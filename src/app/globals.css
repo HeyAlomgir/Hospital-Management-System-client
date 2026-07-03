@@ -2,6 +2,5 @@
 @import "@heroui/styles"; 
 
 body {
-
   @apply bg-[#0f172a] text-slate-100 transition-colors duration-300;
 }

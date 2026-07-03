@@ -20,26 +20,25 @@ const Navbar = () => {
 
   if (pathName.includes("dashboard")) {
     return null;
-  };
-
+  }
 
   const handleSignOut = async () => {
     await authClient.signOut();
   };
+
   return (
     <div>
-      <div className="bg-black p-1 text-white">
-        <marquee>
-          🎉 Avail Up to 4% Extra Discount with Bank Transfer | 💳 Cash on
-          Delivery Available | 🚚 Fast Delivery in 2–3 Days.
+      <div className="bg-teal-950 border-b border-teal-900/50 p-1 text-teal-400 text-sm font-medium">
+        <marquee scrollamount="4">
+          🚑 Emergency Service Available 24/7 | 📞 Hotline: +880 1234-567890 | 🩺 Book Online Appointments to Skip the Queue.
         </marquee>
       </div>
 
-      <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
-        <header className="mx-auto flex h-16 max-w-7xl items-center justify-between px-2">
+      <nav className="sticky top-0 z-40 w-full border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur-lg">
+        <header className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
           <div className="flex items-center gap-4">
             <button
-              className="md:hidden"
+              className="md:hidden text-slate-300"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
@@ -71,50 +70,50 @@ const Navbar = () => {
             <Link href={'/'}>
               <div className="flex items-center gap-3">
                 <Image
-                  height={40}
-                  width={40}
+                  height={300}
+                  width={300}
                   loading="eager"
-                  src="/logo.webp"
+                  src="/logoo.png"
                   alt="logo"
                 />
-                <p className="font-bold">Tech Bazaar</p>
+               
               </div>
             </Link>
           </div>
-          <ul className="hidden items-center gap-4 md:flex">
+          <ul className="hidden items-center gap-6 md:flex text-slate-300 font-medium text-sm">
             <li>
-              <Link
-                href="#"
-                className="font-medium text-accent"
-                aria-current="page"
-              >
-                Browse Products
-              </Link>
+              <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/pricing">Pricing</Link>
+              <Link href="/doctors">Doctors</Link>
+            </li>
+            <li>
+              <Link href="/appointments">Appointments</Link>
             </li>
           </ul>
+
           {!user && (
-            <div className="hidden items-center gap-4 md:flex">
-              <Link href="/signin">Login</Link>
+            <div className="hidden  gap-4 md:flex items-center   ">
+              <Link href="/signin"  className="text-xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">Login</Link>
               <Link href="/signup">
-                <Button>Sign Up</Button>
+                <Button   className="w-full py-3 bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 disabled:opacity-50 text-white font-medium rounded-lg text-sm transition-all mt-4 shadow-lg shadow-teal-500/10">
+                  Register
+                </Button>
               </Link>
             </div>
           )}
 
           {user && (
             <div className="hidden items-center gap-4 md:flex">
-              <Dropdown>
-                <Dropdown.Trigger className="rounded-full">
-                  <Avatar size="sm" aria-label="Menu">
+              <Dropdown className="bg-slate-800 border border-slate-700 text-white">
+                <Dropdown.Trigger className="rounded-full cursor-pointer">
+                  <Avatar size="sm"  color="teal">
                     <Avatar.Image
                       referrerPolicy="no-referrer"
-                      alt="John Doe"
+                      alt={user?.name}
                       src={user?.image}
                     />
-                    <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                    <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
                   </Avatar>
                 </Dropdown.Trigger>
                 <Dropdown.Popover>
@@ -122,13 +121,13 @@ const Navbar = () => {
                     <div className="flex items-center gap-2">
                       <Avatar size="sm">
                         <Avatar.Image alt={user?.name} src={user?.image} />
-                        <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
+                        <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
                       </Avatar>
                       <div className="flex flex-col gap-0">
-                        <p className="text-sm leading-5 font-medium">
+                        <p className="text-sm leading-5 font-medium text-white">
                           {user?.name}
                         </p>
-                        <p className="text-xs leading-none text-muted">
+                        <p className="text-xs leading-none text-slate-400">
                           {user?.email}
                         </p>
                       </div>
@@ -137,29 +136,36 @@ const Navbar = () => {
                   <Dropdown.Menu
                     onAction={(key) => console.log(`Selected: ${key}`)}
                   >
-                    <Dropdown.Item id="new-file" textValue="New file">
+                    <Dropdown.Item id="dashboard" textValue="Dashboard">
                       <Link
-                        className="flex items-center gap-2"
-                        href={`/dashboard/${user?.role}`}
+                        className="flex items-center gap-2 text-slate-200"
+                        href={`/dashboard/${user?.role || "patient"}`}
                       >
-                        <MdDashboard />
+                        <MdDashboard className="text-teal-400" />
                         <Label>Dashboard</Label>
                       </Link>
                     </Dropdown.Item>
 
-                    <Dropdown.Item id="copy-link" textValue="Copy link">
-                      <CgProfile />
-                      <Label>Profile</Label>
+                    <Dropdown.Item id="profile" textValue="Profile">
+                      <Link
+                        className="flex items-center gap-2 text-slate-200"
+                        href={`/dashboard/${user?.role || "patient"}/profile`}
+                      >
+                        <CgProfile className="text-teal-400" />
+                        <Label>Profile</Label>
+                      </Link>
                     </Dropdown.Item>
 
                     <Dropdown.Item
-                      id="delete-file"
-                      textValue="Delete file"
+                      id="logout"
+                      textValue="Logout"
                       variant="danger"
                       onClick={handleSignOut}
                     >
-                      <BiLogOut />
-                      <Label>Logout</Label>
+                      <div className="flex items-center gap-2">
+                        <BiLogOut />
+                        <Label>Logout</Label>
+                      </div>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown.Popover>
@@ -167,32 +173,45 @@ const Navbar = () => {
             </div>
           )}
         </header>
+
         {isMenuOpen && (
-          <div className="border-t border-separator md:hidden">
-            <ul className="flex flex-col gap-2 p-4">
+          <div className="border-t border-slate-800 md:hidden bg-[#0f172a]">
+            <ul className="flex flex-col gap-2 p-4 text-slate-300 font-medium">
               <li>
-                <Link href="#" className="block py-2">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link href={`/dashboard/${user?.role}`} className="block py-2 font-medium text-accent">
-                  Dashboard
+                <Link href="/" className="block py-2" onClick={() => setIsMenuOpen(false)}>
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="#" className="block py-2">
-                  Pricing
+                <Link href="/doctors" className="block py-2" onClick={() => setIsMenuOpen(false)}>
+                  Doctors
                 </Link>
               </li>
-              <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-                <Link href={"/signin" }className="block py-2">
-                  Login
-                </Link>
-                <Link href={"/signup"}>
-                  <Button className="w-full">Sign Up</Button>
+              <li>
+                <Link href="/appointments" className="block py-2" onClick={() => setIsMenuOpen(false)}>
+                  Appointments
                 </Link>
               </li>
+              
+              {!user ? (
+                <li className="mt-4 flex flex-col gap-2 border-t border-slate-800 pt-4">
+                  <Link href="/signin"  className="text-xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent" onClick={() => setIsMenuOpen(false)}>
+                    Login
+                  </Link>
+                  <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
+                    <Button  className="w-full py-3 bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 disabled:opacity-50 text-white font-medium rounded-lg text-sm transition-all mt-4 shadow-lg shadow-teal-500/10">Register</Button>
+                  </Link>
+                </li>
+              ) : (
+                <li className="mt-4 flex flex-col gap-2 border-t border-slate-800 pt-4">
+                  <Link href={`/dashboard/${user?.role || "patient"}`} className="flex items-center gap-2 py-2 text-teal-400" onClick={() => setIsMenuOpen(false)}>
+                    <MdDashboard /> Dashboard
+                  </Link>
+                  <button onClick={() => { handleSignOut(); setIsMenuOpen(false); }} className="flex items-center gap-2 py-2 text-red-400 text-left">
+                    <BiLogOut /> Logout
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         )}
