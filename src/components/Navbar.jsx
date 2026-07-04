@@ -35,10 +35,10 @@ const Navbar = () => {
       </div>
 
       <nav className="sticky top-0 z-40 w-full border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur-lg">
-        <header className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
+        <header className=" flex h-16 container mx-auto items-center justify-between px-4">
           <div className="flex items-center gap-4">
             <button
-              className="md:hidden text-slate-300"
+              className="lg:hidden text-slate-300"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
@@ -80,7 +80,7 @@ const Navbar = () => {
               </div>
             </Link>
           </div>
-          <ul className="hidden items-center gap-6 md:flex text-slate-300 font-medium text-sm">
+          <ul className="md:hidden lg:block items-center gap-6 lg:flex text-slate-300 font-medium text-sm">
             <li>
               <Link href="/">Home</Link>
             </li>
@@ -175,7 +175,7 @@ const Navbar = () => {
         </header>
 
         {isMenuOpen && (
-          <div className="border-t border-slate-800 md:hidden bg-[#0f172a]">
+          <div className="border-t border-slate-800 lg:hidden bg-[#0f172a]">
             <ul className="flex flex-col gap-2 p-4 text-slate-300 font-medium">
               <li>
                 <Link href="/" className="block py-2" onClick={() => setIsMenuOpen(false)}>
