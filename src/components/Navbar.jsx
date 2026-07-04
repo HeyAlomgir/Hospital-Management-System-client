@@ -21,6 +21,7 @@ const Navbar = () => {
   if (pathName.includes("dashboard")) {
     return null;
   }
+  
 
   const handleSignOut = async () => {
     await authClient.signOut();
