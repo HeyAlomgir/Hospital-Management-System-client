@@ -81,7 +81,7 @@ const Navbar = () => {
               </div>
             </Link>
           </div>
-          <ul className="md:hidden lg:block items-center gap-6 lg:flex text-slate-300 font-medium text-sm">
+          <ul className="hidden lg:block items-center gap-6 lg:flex text-slate-300 font-medium text-sm">
             <li>
               <Link href="/">Home</Link>
             </li>
